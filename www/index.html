@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Autovance Scoreboard</title>
+		<!--<script type="text/javascript" src="js/shortcutplugin.js"></script>-->
+		<script type="text/javascript" charset="utf-8">
+
+		// Wait for Cordova to load
+		//
+		//window.plugins.Shortcut.CreateShortcut("ScoreBoard", successfunc, failfunc );
+		document.addEventListener("deviceready", onDeviceReady, false);
+		window.onload = function() { 
+			//alert(device.uuid);
+			var ref = window.open('http://scoreboard.autovance.com/Home/MobileStart/' + device.uuid, '_blank', 'location=no,toolbar=no');
+		};
+		window.onunload = function(){};
+		// Cordova is ready
+		//
+		function onDeviceReady() {
+			var ref = window.open('http://scoreboard.autovance.com/Home/MobileStart/' + device.uuid, '_blank', 'location=no,toolbar=no');
+			 //ref.addEventListener('loadstart', function() { alert('start: ' + event.url); });
+			 //ref.addEventListener('loadstop', function() { alert('stop: ' + event.url); });
+			 //ref.addEventListener('exit', function() { alert(event.type); });
+			 document.addEventListener("resume", onResume, false);
+			 
+			var devicePlatform = device.platform;
+			if (devicePlatform == "Android") {
+				if (window.localStorage.getItem("shortcut") != "1")
+					{			
+						window.plugins.Shortcut.CreateShortcut("Scoreboard", function() {}, function(){} );
+						window.localStorage.setItem("shortcut", "1");
+					}
+			}
+		}
+		function onResume() {
+			setTimeout(function() {
+			  // TODO: do your thing!
+				var ref = window.open('http://scoreboard.autovance.com/Home/MobileStart/' + device.uuid, '_blank', 'location=no,toolbar=no');
+
+			}, 0);
+		}
+		</script>
+    </head>
+    <body>
+        <script type="text/javascript" src="phonegap.js"></script>
+		
+    </body>
+</html>
